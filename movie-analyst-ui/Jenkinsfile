@@ -1,0 +1,36 @@
+node {
+
+    def frontendImage
+
+    step([$class: 'WsCleanup'])
+
+    stage('Chechkout SCM') {
+        checkout scm
+    }
+
+    stage('Run test') {
+        dir('movie-analyst-ui') {
+            docker.image('node:10.11.0-alpine').inside {
+                sh 'npm install'
+                sh 'npm test'
+            }
+        }
+    }
+
+    stage('Build frontend image') {
+        dir('movie-analyst-ui') {
+            frontendImage = docker.build('manuel11coral23/my-node-js-frontend-image')
+        }
+    }
+
+    stage('Pushing image to registry') {
+        docker.withRegistry('', 'docker-hub') {
+            frontendImage.push("$BUILD_NUMBER")
+        }
+    }
+
+    stage('Removing unnecessary images') {
+        sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-frontend-image"'
+    }
+
+}
