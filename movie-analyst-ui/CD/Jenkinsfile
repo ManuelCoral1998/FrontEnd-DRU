@@ -10,23 +10,19 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            //sh './inventory/ec2.py'
-
-            withCredentials([sshUserPrivateKey(credentialsId: 'ssh', keyFileVariable: 'pem')]) {
-                 sh '''
-                    ansible-playbook -i ./inventory/ec2.py \
-                    site.yml \
-                    --private-key= ${pem} \
-                    -u ubuntu -vvv \
-                    -e back_host=env.back_host \
-                    -e db_host=env.db_host \
-                    -e db_user=applicationuser \
-                    -e db_pass=env.db_pass \
-                    -e db_port=3306 \
-                    -e port=3000 \
-                    -e db_name=movie_db
-                '''
-            }
+            sh '''
+                ansible-playbook -i ./inventory/ec2.py \
+                site.yml \
+                --private-key= env.pemPath \
+                -u ubuntu -vvv \
+                -e back_host=env.back_host \
+                -e db_host=env.db_host \
+                -e db_user=applicationuser \
+                -e db_pass=env.db_pass \
+                -e db_port=3306 \
+                -e port=3000 \
+                -e db_name=movie_db
+            '''
         }
     }
 
