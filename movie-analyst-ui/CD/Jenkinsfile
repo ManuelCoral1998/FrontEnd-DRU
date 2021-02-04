@@ -13,7 +13,7 @@ node {
             sh '''
                 ansible-playbook -i ./inventory/ec2.py \
                 site.yml \
-                --private-key=${env.pemPath} \
+                --private-key="${env.pemPath}" \
                 -u ubuntu -vvv \
                 -e back_host="${env.back_host}" \
                 -e db_host="${env.db_host}" \
