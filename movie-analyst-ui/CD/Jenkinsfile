@@ -25,7 +25,7 @@ node {
             '''*/
             sh 'ls'
             ansiblePlaybook (
-                playbook: '../site.yml',
+                playbook: 'site.yml',
                 inventory: 'inventory/ec2.py',
                 sudoUser: 'ubuntu',
                 extras: '--private-key=./pem/manuel-corall-ramp-up-devops.pem -vvv -e back_host=internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com \
