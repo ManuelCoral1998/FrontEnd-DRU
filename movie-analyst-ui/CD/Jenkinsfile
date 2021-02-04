@@ -1,0 +1,9 @@
+node {
+    
+    stage ('Checkout aditional repo') {
+        dir('CM') {
+            git " https://github.com/ManuelCoral1998/ConfigurationManagement-DRU.git"
+        }
+    }
+
+}
