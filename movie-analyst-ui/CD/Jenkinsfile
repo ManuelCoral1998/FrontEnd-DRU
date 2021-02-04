@@ -10,7 +10,7 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            sh '''
+            /*sh '''
             ansible-playbook -i ec2.py \
             ../site.yml \
             --private-key=./pem/manuel-corall-ramp-up-devops.pem \
@@ -22,7 +22,24 @@ node {
             -e db_port=3306 \
             -e port=3000 \
             -e db_name=movie_db
-            '''
+            '''*/
+            
+            ansiblePlaybook (
+                playbook: '../site.yml',
+                inventory: 'inventory/ec2.py'
+                credentialId: './pem/manuel-corall-ramp-up-devops.pem'
+                sudoUser: 'ubuntu',
+                extras: '-vvv',
+                extraVars {
+                    extraVar('back_host', 'internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com')
+                    extraVar('db_host', 'movie-db.cx02uzagq3fl.us-west-1.rds.amazonaws.com')
+                    extraVar('db_user', 'applicationuser')
+                    extraVar('db_pass', 'applicationuser')
+                    extraVar('db_port', '3306')
+                    extraVar('port', '3000')
+                    extraVar('db_name', 'movie_db')
+                }
+            )
         }
     }
 
