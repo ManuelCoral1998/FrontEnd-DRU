@@ -1,8 +1,10 @@
 node {
     
+    step([$class: 'WsCleanup'])
+
     stage ('Checkout aditional repo') {
         dir('CM') {
-            git " https://github.com/ManuelCoral1998/ConfigurationManagement-DRU.git"
+            git branch: 'ansible-with-docker', url:"https://github.com/ManuelCoral1998/ConfigurationManagement-DRU.git"
         }
     }
 
