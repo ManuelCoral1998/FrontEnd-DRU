@@ -10,7 +10,7 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            sh '''
+            sh """
                 ansible-playbook -i ./inventory/ec2.py \
                 site.yml \
                 --private-key="${env.pemPath}" \
@@ -22,7 +22,7 @@ node {
                 -e db_port=3306 \
                 -e port=3000 \
                 -e db_name=movie_db
-            '''
+            """
         }
     }
 
