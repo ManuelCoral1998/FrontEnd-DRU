@@ -19,7 +19,7 @@ node {
                 -e back_host=<back_host> \
                 -e db_host=<db_host> \
                 -e db_user=applicationuser \
-                -e db_pass=<pass> \
+                -e db_pass=env.db_pass \
                 -e db_port=3306 \
                 -e port=3000 \
                 -e db_name=movie_db
