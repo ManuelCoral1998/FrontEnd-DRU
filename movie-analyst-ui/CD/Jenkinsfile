@@ -29,8 +29,14 @@ node {
                 inventory: 'inventory/ec2.py',
                 credentialId: './pem/manuel-corall-ramp-up-devops.pem',
                 sudoUser: 'ubuntu',
-                extras: '-vvv',
-                extraVars {
+                extras: ' -vvv -e back_host=internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com \
+                -e db_host=movie-db.cx02uzagq3fl.us-west-1.rds.amazonaws.com \
+                -e db_user=applicationuser \
+                -e db_pass=applicationuser \
+                -e db_port=3306 \
+                -e port=3000 \
+                -e db_name=movie_db '
+                /*extraVars {
                     extraVar('back_host', 'internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com')
                     extraVar('db_host', 'movie-db.cx02uzagq3fl.us-west-1.rds.amazonaws.com')
                     extraVar('db_user', 'applicationuser')
@@ -38,7 +44,7 @@ node {
                     extraVar('db_port', '3306')
                     extraVar('port', '3000')
                     extraVar('db_name', 'movie_db')
-                }
+                }*/
             )
         }
     }
