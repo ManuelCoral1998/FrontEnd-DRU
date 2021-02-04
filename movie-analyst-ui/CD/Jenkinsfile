@@ -10,48 +10,20 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            /*sh '''
-            ansible-playbook -i ec2.py \
-            ../site.yml \
-            --private-key=./pem/manuel-corall-ramp-up-devops.pem \
-            -u ubuntu -vvv \
-            -e back_host=internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com \
-            -e db_host=movie-db.cx02uzagq3fl.us-west-1.rds.amazonaws.com \
-            -e db_user=applicationuser \
-            -e db_pass=<pass> \
-            -e db_port=3306 \
-            -e port=3000 \
-            -e db_name=movie_db
-            '''*/
-
-            docker.image('williamyeh/ansible:ubuntu18.04').inside {
-                sh './inventory/ec2.py'
-                sh '''
-                    ansible-playbook -i ec2.py \
-                    ../site.yml \
-                    --private-key=./pem/manuel-corall-ramp-up-devops.pem \
-                    -u ubuntu -vvv \
-                    -e back_host=internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com \
-                    -e db_host=movie-db.cx02uzagq3fl.us-west-1.rds.amazonaws.com \
-                    -e db_user=applicationuser \
-                    -e db_pass=<pass> \
-                    -e db_port=3306 \
-                    -e port=3000 \
-                    -e db_name=movie_db
-                '''
-            }
-            /*ansiblePlaybook (
-                playbook: 'site.yml',
-                inventory: 'inventory/ec2.py',
-                sudoUser: 'ubuntu',
-                extras: '--private-key=<pem> -vvv -e back_host=internal-back-tf-ALB-devops-ramp-up-1153697107.us-west-1.elb.amazonaws.com \
-                -e db_host=movie-db.cx02uzagq3fl.us-west-1.rds.amazonaws.com \
+            sh './inventory/ec2.py'
+            sh '''
+                ansible-playbook -i ./inventory/ec2.py \
+                site.yml \
+                --private-key= <path pem> \
+                -u ubuntu -vvv \
+                -e back_host=<back_host> \
+                -e db_host=<db_host> \
                 -e db_user=applicationuser \
                 -e db_pass=<pass> \
                 -e db_port=3306 \
                 -e port=3000 \
-                -e db_name=movie_db '
-            )*/
+                -e db_name=movie_db
+            '''
         }
     }
 
