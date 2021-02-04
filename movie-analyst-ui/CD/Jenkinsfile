@@ -10,7 +10,7 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            sh './inventory/ec2.py'
+            //sh './inventory/ec2.py'
             sh '''
                 ansible-playbook -i ./inventory/ec2.py \
                 site.yml \
