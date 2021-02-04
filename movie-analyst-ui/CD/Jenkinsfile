@@ -23,11 +23,11 @@ node {
             -e port=3000 \
             -e db_name=movie_db
             '''*/
-            
+
             ansiblePlaybook (
                 playbook: '../site.yml',
-                inventory: 'inventory/ec2.py'
-                credentialId: './pem/manuel-corall-ramp-up-devops.pem'
+                inventory: 'inventory/ec2.py',
+                credentialId: './pem/manuel-corall-ramp-up-devops.pem',
                 sudoUser: 'ubuntu',
                 extras: '-vvv',
                 extraVars {
