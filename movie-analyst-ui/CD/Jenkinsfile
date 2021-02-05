@@ -10,7 +10,7 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            echo "$TAG"
+            echo "the tag is: ${params.TAG}"
             /*sh """
                 ansible-playbook -i ./inventory/ec2.py \
                 site.yml \
