@@ -34,7 +34,9 @@ node {
     }
 
     stage('Trigger CD') {
-        build job: 'CD pipeline frontend', parameters: [[$class: "stringParameterValue", name: "TAG", value: "$BUILD_NUMBER"]], wait: false
+        build job: 'CD pipeline frontend', parameters: [
+            string(name: 'TAG', value: "$BUILD_NUMBER")
+        ]
     }
 
 }
