@@ -8,7 +8,7 @@ node {
         checkout scm
     }
 
-    /*stage('Run test') {
+    stage('Run test') {
         dir('movie-analyst-ui') {
             docker.image('node:10.11.0-alpine').inside {
                 sh 'npm install'
@@ -31,7 +31,7 @@ node {
 
     stage('Removing unnecessary images') {
         sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-frontend-image"'
-    }*/
+    }
 
     stage('Trigger CD') {
         build job: 'CD pipeline frontend', parameters: [
