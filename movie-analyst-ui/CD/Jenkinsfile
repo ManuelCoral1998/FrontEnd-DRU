@@ -23,7 +23,7 @@ node {
                 -e db_port=3306 \
                 -e port=3000 \
                 -e db_name=movie_db
-                -e tag="${params.TAG}"
+                -e tag=${params.TAG}
             """
         }
     }
