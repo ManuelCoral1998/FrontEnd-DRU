@@ -33,4 +33,8 @@ node {
         sh 'docker image prune -a -f --filter "label!=manuel11coral23/my-node-js-frontend-image"'
     }
 
+    stage('Trigger CD') {
+        build job: 'CD pipeline frontend', parameters: [[$class: "stringParameterValue", name: "TAG", value: "$BUILD_NUMBER"]], wait: false
+    }
+
 }
