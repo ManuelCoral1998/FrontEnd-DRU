@@ -14,7 +14,8 @@ node {
 
     stage ('Execute deployment with ansible') {
         dir('CM/CM-Jenkins') {
-            sh """
+            echo "Proceding"
+            /*sh """
                 ansible-playbook -i ./inventory/ec2.py \
                 -l tag_Name_front_tf_devops_ramp_up_manuel_corall \
                 site.yml \
@@ -28,7 +29,7 @@ node {
                 -e port=3000 \
                 -e db_name=movie_db \
                 -e tag=${params.TAG}
-            """
+            """*/
         }
     }
 
